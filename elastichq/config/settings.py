@@ -10,7 +10,8 @@ _search_paths = [
     './elastichq.json',
     './elastichq/elastichq.json',
     './elastichq/config/elastichq.json',
-    '~/elastichq.json'
+    '~/elastichq.json',
+    '/etc/config/elastichq.json'
 ]
 
 
