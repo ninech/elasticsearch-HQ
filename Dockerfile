@@ -18,10 +18,7 @@ EXPOSE  5000
 COPY ./deployment/logging.conf /src/logging.conf
 COPY ./deployment/gunicorn.conf /src/gunicorn.conf
 
-# Setup supervisord
-RUN mkdir -p /var/log/supervisor
-COPY ./deployment/supervisord.conf /etc/supervisor/supervisord.conf
-COPY ./deployment/gunicorn.conf /etc/supervisor/conf.d/gunicorn.conf
+WORKDIR /src
 
 # Start processes
-CMD ["supervisord", "-c", "/etc/supervisor/supervisord.conf"]
+CMD ["/usr/local/bin/gunicorn", "application:application", "-w", "4", "--config", "/src/gunicorn.conf", "--log-config", "/src/logging.conf", "--bind", "0.0.0.0:5000"]
